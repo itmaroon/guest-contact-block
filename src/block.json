@@ -1,0 +1,54 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "itmar/guest-contact-block",
+	"version": "0.1.0",
+	"title": "Guest Contact Block",
+	"category": "media",
+	"description": "メール送信フォームを備えたブロックです。",
+	"supports": {
+		"multiple": false,
+		"html": false
+	},
+	"attributes": {
+		"label_width": {
+			"type": "string",
+			"default": "100px"
+		},
+		"master_mail": {
+			"type": "string",
+			"default": "master@sample.com"
+		},
+		"subject_info": {
+			"type": "string",
+			"default": ""
+		},
+		"message_info": {
+			"type": "string",
+			"default": ""
+		},
+		"ret_mail": {
+			"type": "string",
+			"default": ""
+		},
+		"subject_ret": {
+			"type": "string",
+			"default": ""
+		},
+		"message_ret": {
+			"type": "string",
+			"default": ""
+		},
+		"is_retmail": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"providesContext": {
+		"itmar/label_width": "label_width"
+	},
+	"textdomain": "guest-contact-block",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
