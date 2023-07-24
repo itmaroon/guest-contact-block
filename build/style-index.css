@@ -7,10 +7,12 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
-.wp-block-itmar-guest-contact-block {
-  background-color: #fdf1ce;
-  color: #070707;
-  padding: 2px;
+.wp-block-itmar-guest-contact-block #guest_contact_form .err_msg {
+  position: absolute;
+  font-size: 0.8em;
+  color: rgb(209, 6, 6);
+  top: 90%;
+  left: 15%;
 }
 
 /*# sourceMappingURL=style-index.css.map*/

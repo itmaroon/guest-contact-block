@@ -15,17 +15,54 @@
 			"type": "string",
 			"default": "100px"
 		},
+		"bgColor_form": {
+			"type": "string"
+		},
+		"bgGradient_form": {
+			"type": "string"
+		},
+		"radius_form": {
+			"type": "object",
+			"default": {
+				"topLeft": "0px",
+				"topRight": "0px",
+				"bottomRight": "0px",
+				"bottomLeft": "0px",
+				"value": "0px"
+			}
+		},
+		"border_form": {
+			"type": "object"
+		},
+		"margin_form": {
+			"type": "object",
+			"default": {
+				"top": "1em",
+				"left": "2em",
+				"bottom": "1em",
+				"right": "2em"
+			}
+		},
+		"padding_form": {
+			"type": "object",
+			"default": {
+				"top": "1em",
+				"left": "2em",
+				"bottom": "1em",
+				"right": "2em"
+			}
+		},
 		"master_mail": {
 			"type": "string",
 			"default": "master@sample.com"
 		},
 		"subject_info": {
 			"type": "string",
-			"default": ""
+			"default": "お問合せが入りました。"
 		},
 		"message_info": {
 			"type": "string",
-			"default": ""
+			"default": "以下の内容でお問合せが入りました。"
 		},
 		"ret_mail": {
 			"type": "string",
@@ -33,13 +70,17 @@
 		},
 		"subject_ret": {
 			"type": "string",
-			"default": ""
+			"default": "お問合せいただきありがとうございます。"
 		},
 		"message_ret": {
 			"type": "string",
-			"default": ""
+			"default": "以下の内容でお問合せを受け付けました。"
 		},
 		"is_retmail": {
+			"type": "boolean",
+			"default": true
+		},
+		"is_dataSave": {
 			"type": "boolean",
 			"default": true
 		}
