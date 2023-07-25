@@ -1,5 +1,5 @@
 
-import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks, RichText } from '@wordpress/block-editor';
 import { borderProperty, radiusProperty, marginProperty, paddingProperty } from './styleProperty';
 
 export default function save({ attributes }) {
@@ -10,6 +10,8 @@ export default function save({ attributes }) {
 		border_form,
 		margin_form,
 		padding_form,
+		headingComfirm,
+		headingThanks,
 		master_mail,
 		subject_info,
 		message_info,
@@ -33,20 +35,37 @@ export default function save({ attributes }) {
 
 	return (
 		<div {...useBlockProps.save({ style: blockStyle })}>
-			<form
-				id="guest_contact_form"
-				data-master_mail={master_mail}
-				data-subject_info={subject_info}
-				data-message_info={message_info}
-				data-ret_mail={ret_mail}
-				data-subject_ret={subject_ret}
-				data-message_ret={message_ret}
-				data-is_retmail={is_retmail}
-				data-is_datasave={is_dataSave}
-			>
-				<InnerBlocks.Content />
+			<fieldset class="data_input_area">
+				<form
+					id="guest_contact_form"
+					data-master_mail={master_mail}
+					data-subject_info={subject_info}
+					data-message_info={message_info}
+					data-ret_mail={ret_mail}
+					data-subject_ret={subject_ret}
+					data-message_ret={message_ret}
+					data-is_retmail={is_retmail}
+					data-is_datasave={is_dataSave}
+				>
+					<InnerBlocks.Content />
+					<input type="submit" value="確認画面へ" />
+				</form>
+			</fieldset>
+			<fieldset class="data_confirm_area">
+				<RichText.Content
+					value={headingComfirm}
+				/>
+				<table>
+
+				</table>
 				<input type="submit" value="送信" />
-			</form>
+			</fieldset>
+			<fieldset class="result_disp_area">
+				<RichText.Content
+					tagName="h2"
+					value={headingThanks}
+				/>
+			</fieldset>
 		</div>
 	);
 }

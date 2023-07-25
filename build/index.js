@@ -112,6 +112,8 @@ function Edit({
     border_form,
     margin_form,
     padding_form,
+    headingComfirm,
+    headingThanks,
     master_mail,
     subject_info,
     message_info,
@@ -440,7 +442,13 @@ function Edit({
     value: "\u78BA\u8A8D\u753B\u9762\u3078"
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("fieldset", {
     class: "data_confirm_area"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", null, innerBlocks.map((input_elm, index) => {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
+    onChange: newContent => setAttributes({
+      headingComfirm: newContent
+    }),
+    value: headingComfirm,
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Write your text...')
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", null, innerBlocks.map((input_elm, index) => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
       key: index
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, input_elm.attributes.labelContent), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, input_elm.attributes.inputValue));
@@ -449,7 +457,13 @@ function Edit({
     value: "\u9001\u4FE1"
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("fieldset", {
     class: "result_disp_area"
-  })));
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
+    onChange: newContent => setAttributes({
+      headingThanks: newContent
+    }),
+    value: headingThanks,
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Write your text...')
+  }))));
 }
 
 /***/ }),
@@ -517,6 +531,8 @@ function save({
     border_form,
     margin_form,
     padding_form,
+    headingComfirm,
+    headingThanks,
     master_mail,
     subject_info,
     message_info,
@@ -546,6 +562,8 @@ function save({
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
       style: blockStyle
     })
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("fieldset", {
+    class: "data_input_area"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", {
     id: "guest_contact_form",
     "data-master_mail": master_mail,
@@ -558,7 +576,19 @@ function save({
     "data-is_datasave": is_dataSave
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "submit",
+    value: "\u78BA\u8A8D\u753B\u9762\u3078"
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("fieldset", {
+    class: "data_confirm_area"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+    value: headingComfirm
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "submit",
     value: "\u9001\u4FE1"
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("fieldset", {
+    class: "result_disp_area"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+    tagName: "h2",
+    value: headingThanks
   })));
 }
 
@@ -749,7 +779,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"itmar/guest-contact-block","version":"0.1.0","title":"Guest Contact Block","category":"media","description":"メール送信フォームを備えたブロックです。","supports":{"multiple":false,"html":false},"attributes":{"label_width":{"type":"string","default":"100px"},"bgColor_form":{"type":"string"},"bgGradient_form":{"type":"string"},"radius_form":{"type":"object","default":{"topLeft":"0px","topRight":"0px","bottomRight":"0px","bottomLeft":"0px","value":"0px"}},"border_form":{"type":"object"},"margin_form":{"type":"object","default":{"top":"1em","left":"2em","bottom":"1em","right":"2em"}},"padding_form":{"type":"object","default":{"top":"1em","left":"2em","bottom":"1em","right":"2em"}},"master_mail":{"type":"string","default":"master@sample.com"},"subject_info":{"type":"string","default":"お問合せが入りました。"},"message_info":{"type":"string","default":"以下の内容でお問合せが入りました。"},"ret_mail":{"type":"string","default":""},"subject_ret":{"type":"string","default":"お問合せいただきありがとうございます。"},"message_ret":{"type":"string","default":"以下の内容でお問合せを受け付けました。"},"is_retmail":{"type":"boolean","default":true},"is_dataSave":{"type":"boolean","default":true}},"providesContext":{"itmar/label_width":"label_width"},"textdomain":"guest-contact-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"itmar/guest-contact-block","version":"0.1.0","title":"Guest Contact Block","category":"media","description":"メール送信フォームを備えたブロックです。","supports":{"multiple":false,"html":false},"attributes":{"label_width":{"type":"string","default":"100px"},"bgColor_form":{"type":"string"},"bgGradient_form":{"type":"string"},"radius_form":{"type":"object","default":{"topLeft":"0px","topRight":"0px","bottomRight":"0px","bottomLeft":"0px","value":"0px"}},"border_form":{"type":"object"},"margin_form":{"type":"object","default":{"top":"1em","left":"2em","bottom":"1em","right":"2em"}},"padding_form":{"type":"object","default":{"top":"1em","left":"2em","bottom":"1em","right":"2em"}},"headingComfirm":{"type":"string"},"headingThanks":{"type":"string","source":"html","selector":"h2"},"master_mail":{"type":"string","default":"master@sample.com"},"subject_info":{"type":"string","default":"お問合せが入りました。"},"message_info":{"type":"string","default":"以下の内容でお問合せが入りました。"},"ret_mail":{"type":"string","default":""},"subject_ret":{"type":"string","default":"お問合せいただきありがとうございます。"},"message_ret":{"type":"string","default":"以下の内容でお問合せを受け付けました。"},"is_retmail":{"type":"boolean","default":true},"is_dataSave":{"type":"boolean","default":true}},"providesContext":{"itmar/label_width":"label_width"},"textdomain":"guest-contact-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 

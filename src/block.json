@@ -52,6 +52,14 @@
 				"right": "2em"
 			}
 		},
+		"headingComfirm": {
+			"type": "string"
+		},
+		"headingThanks": {
+			"type": "string",
+			"source": "html",
+			"selector": "h2"
+		},
 		"master_mail": {
 			"type": "string",
 			"default": "master@sample.com"

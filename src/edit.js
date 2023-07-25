@@ -3,6 +3,7 @@ import { __ } from '@wordpress/i18n';
 import {
 	useBlockProps,
 	InnerBlocks,
+	RichText,
 	useInnerBlocksProps,
 	InspectorControls,
 	__experimentalPanelColorGradientSettings as PanelColorGradientSettings,
@@ -74,6 +75,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		border_form,
 		margin_form,
 		padding_form,
+		headingComfirm,
+		headingThanks,
 		master_mail,
 		subject_info,
 		message_info,
@@ -393,7 +396,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</form>
 				</fieldset>
 				<fieldset class="data_confirm_area">
-
+					<RichText
+						onChange={(newContent) => setAttributes({ headingComfirm: newContent })}
+						value={headingComfirm}
+						placeholder={__('Write your text...')}
+					/>
 					<table>
 						{innerBlocks.map((input_elm, index) => {
 							return (
@@ -408,7 +415,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					<input type="submit" value="送信" />
 				</fieldset>
 				<fieldset class="result_disp_area">
-
+					<RichText
+						onChange={(newContent) => setAttributes({ headingThanks: newContent })}
+						value={headingThanks}
+						placeholder={__('Write your text...')}
+					/>
 				</fieldset>
 			</div>
 		</>
