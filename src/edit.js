@@ -107,7 +107,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	//インナーブロックの制御
 	const TEMPLATE = [
 		['itmar/design-text-ctrl', { inputName: 'user_name', labelContent: 'お名前', required: { flg: true, display: "*" } }],
-		['itmar/design-text-ctrl', { inputName: 'email', labelContent: 'メールアドレス', inputType: 'email', required: { flg: true, display: "*" } }],
+		['itmar/design-text-ctrl', { inputName: 'email', labelContent: 'メールアドレス', inputType: 'email', required: { flg: true, display: "*" } }]
 	];
 	const innerBlocksProps = useInnerBlocksProps(
 		{},
@@ -120,6 +120,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	//インナーブロックを取得
 	const innerBlocks = useSelect((select) => select('core/block-editor').getBlocks(clientId), [clientId]);
+
 	//インナーブロックのラベル幅を取得
 	useEffect(() => {
 		const maxNum = innerBlocks.reduce((max, block) => {
@@ -384,10 +385,31 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			</InspectorControls>
 
 			<div {...useBlockProps({ style: blockStyle })}>
-				<form onSubmit={handleSubmit}>
-					<div {...innerBlocksProps}></div>
+
+				<fieldset class="data_input_area">
+					<form onSubmit={handleSubmit}>
+						<div {...innerBlocksProps}></div>
+						<input type="submit" value="確認画面へ" />
+					</form>
+				</fieldset>
+				<fieldset class="data_confirm_area">
+
+					<table>
+						{innerBlocks.map((input_elm, index) => {
+							return (
+								<tr key={index}>
+									<td>{input_elm.attributes.labelContent}</td>
+									<td>{input_elm.attributes.inputValue}</td>
+								</tr>
+							);
+						})}
+
+					</table>
 					<input type="submit" value="送信" />
-				</form>
+				</fieldset>
+				<fieldset class="result_disp_area">
+
+				</fieldset>
 			</div>
 		</>
 	);
