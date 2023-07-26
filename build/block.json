@@ -11,55 +11,6 @@
     "html": false
   },
   "attributes": {
-    "label_width": {
-      "type": "string",
-      "default": "100px"
-    },
-    "bgColor_form": {
-      "type": "string"
-    },
-    "bgGradient_form": {
-      "type": "string"
-    },
-    "radius_form": {
-      "type": "object",
-      "default": {
-        "topLeft": "0px",
-        "topRight": "0px",
-        "bottomRight": "0px",
-        "bottomLeft": "0px",
-        "value": "0px"
-      }
-    },
-    "border_form": {
-      "type": "object"
-    },
-    "margin_form": {
-      "type": "object",
-      "default": {
-        "top": "1em",
-        "left": "2em",
-        "bottom": "1em",
-        "right": "2em"
-      }
-    },
-    "padding_form": {
-      "type": "object",
-      "default": {
-        "top": "1em",
-        "left": "2em",
-        "bottom": "1em",
-        "right": "2em"
-      }
-    },
-    "headingComfirm": {
-      "type": "string"
-    },
-    "headingThanks": {
-      "type": "string",
-      "source": "html",
-      "selector": "h2"
-    },
     "master_mail": {
       "type": "string",
       "default": "master@sample.com"
@@ -91,10 +42,14 @@
     "is_dataSave": {
       "type": "boolean",
       "default": true
+    },
+    "state_process": {
+      "type": "string",
+      "default": "input"
     }
   },
   "providesContext": {
-    "itmar/label_width": "label_width"
+    "itmar/state_process": "state_process"
   },
   "textdomain": "guest-contact-block",
   "editorScript": "file:./index.js",
