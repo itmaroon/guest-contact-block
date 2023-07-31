@@ -10,11 +10,11 @@
 .wp-block-itmar-guest-contact-block .figure_fieldset.appear {
   display: block;
 }
-.wp-block-itmar-guest-contact-block #guest_contact_form .err_msg {
+.wp-block-itmar-guest-contact-block #to_confirm_form .err_msg {
   position: absolute;
   font-size: 0.8em;
   color: rgb(209, 6, 6);
   top: 90%;
-  left: 15%;
+  left: 10%;
 }
 /*# sourceMappingURL=style.css.map */
