@@ -6,6 +6,16 @@
  */
 
 .wp-block-itmar-guest-contact-block {
+	.figure_fieldset {
+		display: none;
+
+		&.appear {
+			display: block;
+		}
+	}
+
+
+
 	#guest_contact_form {
 		.err_msg {
 			position: absolute;

@@ -7,6 +7,12 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
+.wp-block-itmar-guest-contact-block .figure_fieldset {
+  display: none;
+}
+.wp-block-itmar-guest-contact-block .figure_fieldset.appear {
+  display: block;
+}
 .wp-block-itmar-guest-contact-block #guest_contact_form .err_msg {
   position: absolute;
   font-size: 0.8em;

@@ -104,7 +104,9 @@ function Edit({
   } = attributes;
 
   //インナーブロックの制御
-  const TEMPLATE = [['itmar/process-figure-block', {}], ['itmar/input-figure-block', {}], ['itmar/confirm-figure-block', {}], ['itmar/thanks-figure-block', {}]];
+  const TEMPLATE = [
+  //同一ブロックを２つ以上入れないこと（名称の文字列が重ならないこと）
+  ['itmar/design-process', {}], ['itmar/input-figure-block', {}], ['itmar/confirm-figure-block', {}], ['itmar/thanks-figure-block', {}]];
   const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useInnerBlocksProps)({}, {
     template: TEMPLATE,
     templateLock: true

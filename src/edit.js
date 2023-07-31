@@ -68,8 +68,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	} = attributes;
 
 	//インナーブロックの制御
-	const TEMPLATE = [
-		['itmar/process-figure-block', {}],
+	const TEMPLATE = [//同一ブロックを２つ以上入れないこと（名称の文字列が重ならないこと）
+		['itmar/design-process', {}],
 		['itmar/input-figure-block', {}],
 		['itmar/confirm-figure-block', {}],
 		['itmar/thanks-figure-block', {}]
