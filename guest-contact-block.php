@@ -61,7 +61,8 @@ function itmar_contact_send_ajax(){
 
 		// バリデーション
 		if ( ! is_email( $to ) || ! is_email( $reply ) || empty( $subject ) || empty( $message ) ) {
-			echo json_encode(array('status' => 'error', 'message' => 'サーバーで入力項目に不備が発見されました。登録処理は中断されました。'));
+			$response['error'] = array('status' => 'error', 'message' => 'サーバーで入力項目に不備が発見されました。登録処理は中断されました。');
+			echo json_encode($response);
 			die();
 		}
 
@@ -81,46 +82,32 @@ function itmar_contact_send_ajax(){
 					'role' => 'subscriber' 
 				);
 				$user_id = wp_insert_user( $user_data );
-				
 				if ( is_wp_error( $user_id ) ) {
 					// ユーザーの作成に失敗した場合、エラーを処理します
 					$response['save'] = array('status' => 'error', 'message' => $user_id->get_error_message());
 				}else{
 					//コンタクトデータを登録
-					$new_post = array(
-						'post_type'   => 'gcb_contact',//登録するカスタム投稿タイプ
-						'post_status' => 'private',//公開ステータス（ここは個人情報なので非公開に）
-						'post_title'  => 'お問合せデータ',//タイトルは分かりやすいものに
-						'post_author' =>  $user_id
-					);
-					$post_id = wp_insert_post( $new_post, true );
-
-					if ( is_wp_error( $post_id ) ) {
-						// 投稿の作成に失敗した場合、エラーを処理します
-						$response['save'] = array('status' => 'error', 'message' => $post_id->get_error_message());
-						
-					}else{
-						update_post_meta( $post_id, 'send_date', current_time('mysql') );
-						update_post_meta( $post_id, 'message', $message );
-
-						$response['save'] = array('status' => 'success', 'message' => '受付処理が正常に完了しました。');
-					}
+					$response['save']=itmar_contact_save($user_id, $message);
 				}
+			}else{
+				//コンタクトデータを登録
+				$response['save']=itmar_contact_save($user_id, $message);
 			}
+			
 		}
 
 		// メールを送信
 		if (wp_mail($to, $subject, $message, $headers)) {
 			if($is_retMail){
-				$response['mail'] = array('status' => 'success', 'message' => '自動応答メールが正常に送信されました。');
+				$response['ret_mail'] = array('status' => 'success', 'message' => '自動応答メールが正常に送信されました。');
 			}else{
-				$response['mail'] = array('status' => 'success', 'message' => 'サイト管理者に正常に通知されました。');
+				$response['info_mail'] = array('status' => 'success', 'message' => 'サイト管理者に正常に通知されました。');
 			}
 		} else {
 			if($is_retMail){
-				$response['mail'] = array('status' => 'error', 'message' => '自動応答メールの送信に失敗しました。');
+				$response['ret_mail'] = array('status' => 'error', 'message' => '自動応答メールの送信に失敗しました。');
 			}else{
-				$response['mail'] = array('status' => 'error', 'message' => 'サイト管理者への通知に失敗しました。');
+				$response['info_mail'] = array('status' => 'error', 'message' => 'サイト管理者への通知に失敗しました。');
 			}
     		
 		}
@@ -133,5 +120,27 @@ function itmar_contact_send_ajax(){
 }
 add_action( 'wp_ajax_itmar_contact_send', 'itmar_contact_send_ajax' );
 add_action( 'wp_ajax_nopriv_itmar_contact_send', 'itmar_contact_send_ajax' );
+
+function itmar_contact_save($user_id, $message){
+	//コンタクトデータを登録
+	$new_post = array(
+		'post_type'   => 'gcb_contact',//登録するカスタム投稿タイプ
+		'post_status' => 'private',//公開ステータス（ここは個人情報なので非公開に）
+		'post_title'  => 'お問合せデータ',//タイトルは分かりやすいものに
+		'post_author' =>  $user_id
+	);
+	$post_id = wp_insert_post( $new_post, true );
+
+	if ( is_wp_error( $post_id ) ) {
+		// 投稿の作成に失敗した場合、エラーを処理します
+		return array('status' => 'error', 'message' => $post_id->get_error_message());
+		
+	}else{
+		update_post_meta( $post_id, 'send_date', current_time('mysql') );
+		update_post_meta( $post_id, 'message', $message );
+
+		return array('status' => 'success', 'message' => '受付処理が正常に完了しました。');
+	}
+}
 
 

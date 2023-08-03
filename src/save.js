@@ -1,5 +1,5 @@
 
-import { useBlockProps, InnerBlocks, RichText } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
 
 export default function save({ attributes }) {

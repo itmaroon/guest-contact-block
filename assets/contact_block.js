@@ -6,31 +6,32 @@ jQuery(function ($) {
 
     //ajaxの送り先
     const ajaxUrl = itmar_option.ajaxURL;
-    $.ajax({
-      type: 'POST',
-      url: ajaxUrl,
-      data: {
-        'action': 'itmar_contact_send',
-        'nonce': nonce,
-        'email': send_email,
-        'userName': $('input[name="user_name"]').val(),
-        'subject': subject_mail,
-        'message': message_mail,
-        'reply_address': master_email,
-        'is_dataSave': is_dataSave,
-        'is_retMail': is_retMail,
-      }
-    }).done(function (data) {
-      let ret_obj = JSON.parse(data);
-      console.log(ret_obj)
+    return new Promise((resolve, reject) => {//Promiseを返す
+      $.ajax({
+        type: 'POST',
+        url: ajaxUrl,
+        data: {
+          'action': 'itmar_contact_send',
+          'nonce': nonce,
+          'email': send_email,
+          'userName': $('input[name="user_name"]').val(),
+          'subject': subject_mail,
+          'message': message_mail,
+          'reply_address': master_email,
+          'is_dataSave': is_dataSave,
+          'is_retMail': is_retMail,
+        }
+      }).done(function (data) {
+        let ret_obj = JSON.parse(data);
+        resolve(ret_obj);
+      }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        console.log(XMLHttpRequest.status);
+        console.log(textStatus);
+        console.log(errorThrown.message);
+        reject(errorThrown);
+      }).always(function () {
 
-    }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-      console.log(XMLHttpRequest.status);
-      console.log(textStatus);
-      console.log(errorThrown.message);
-
-    }).always(function () {
-
+      });
     });
   }
 
@@ -45,6 +46,35 @@ jQuery(function ($) {
     }
     return message
   }
+
+  //プロセス更新関数
+  const process_change = (figure_elm, set_flg) => {
+    let classNames = figure_elm.attr('class').split(/\s+/);  // クラス名を空白文字で分割
+    let wpBlockClasses = $.grep(classNames, function (className) {  // 'wp-block'で始まるクラス名を抽出
+      return /^wp-block/.test(className);
+    });
+    let lis = $('.wp-block-itmar-design-process').find('li');
+    let targetLis = lis.filter(function () {
+      var liClasses = $(this).attr('class').split(/\s+/);  // li要素のクラス名を取得し配列にする
+      return liClasses.some(function (liClass) {
+        if (liClass === "") {
+          return false;  // liClassが空文字であればfalseを返す
+        }
+        var result = wpBlockClasses.some(function (wpBlockClasse) {
+          return wpBlockClasse.includes(liClass);
+        });// wpBlockClassesにliのクラス名が含まれるかチェック
+        return result;
+      });
+    });
+
+    if (set_flg) {
+      targetLis.addClass('ready');
+    } else {
+      targetLis.removeClass('ready');
+    }
+
+  }
+
   //formの送信ボタンが押されたときの処理
   $('#to_confirm_form').on('submit', function (e) {
     e.preventDefault();
@@ -67,30 +97,7 @@ jQuery(function ($) {
     $(this).parent().removeClass('appear');
     $(this).parent().next().addClass('appear');
     //プログレスエリアの処理
-    let classNames = $(this).parent().next().attr('class').split(/\s+/);  // クラス名を空白文字で分割
-    let wpBlockClasses = $.grep(classNames, function (className) {  // 'wp-block'で始まるクラス名を抽出
-      return /^wp-block/.test(className);
-    });
-
-    let lis = $('.wp-block-itmar-design-process').find('li');
-    lis.each(function () {
-      var liClasses = $(this).attr('class').split(/\s+/);
-      console.log('liClasses:', liClasses);
-      console.log('wpBlockClasses[0]:', wpBlockClasses[0]);
-      var some_result = liClasses.some(function (liClass) {
-        var result = wpBlockClasses[0].includes(liClass);
-        return result;
-      });
-      console.log('some_result:', some_result);
-    });
-    // var targetLis = lis.filter(function () {
-    //   var liClasses = $(this).attr('class').split(/\s+/);  // li要素のクラス名を取得し配列にする
-    //   return liClasses.some(function (liClass) {
-    //     var result = wpBlockClasses[0].includes(liClass);  // 'wp-block'で始まるクラス名がliのクラス名を含むかチェック
-    //     return result;
-    //   });
-    // });
-    // console.log(targetLis);
+    process_change($(this).parent().next(), true);
 
     //確認データの表示
     let input_elm = $(this).find('input:not([type="submit"]), textarea')
@@ -117,8 +124,13 @@ jQuery(function ($) {
     if (send_click_btn === 'send_cancel_btn') {
       $(this).parent().removeClass('appear');
       $(this).parent().prev().addClass('appear');
+      //プログレスエリアの処理
+      process_change($(this).parent(), false);
       return;
     }
+
+    // Promiseを格納する配列を作成
+    const promises = [];
 
     //親ブロックの情報取得
     let parent_block = $(this).parents('.wp-block-itmar-guest-contact-block');
@@ -130,7 +142,7 @@ jQuery(function ($) {
     //message_infoの再構築
     message_info = message_rebuild(message_info);
     //通知メールの送信
-    //sendMail_ajax(master_email, subject_info, message_info, master_email, false, false);
+    promises.push(sendMail_ajax(master_email, subject_info, message_info, master_email, false, false));
     //自動応答メール
     let is_retmail = parent_block.data('is_retmail');
     if (is_retmail) {
@@ -142,19 +154,65 @@ jQuery(function ($) {
       //message_retの再構築
       message_ret = message_rebuild(message_ret);
       //自動応答メールの送信
-      //sendMail_ajax(ret_email, subject_ret, message_ret, master_email, is_dataSave, true);
+      promises.push(sendMail_ajax(ret_email, subject_ret, message_ret, master_email, is_dataSave, true));
     }
 
-    //画面遷移
-    $(this).parent().removeClass('appear');
-    $(this).parent().next().addClass('appear');
+    let figure_elm = $(this).parent();
+
+    // Promise.allSettledですべての非同期処理が完了するのを待つ
+    Promise.allSettled(promises)
+      .then((result) => {
+        //送信結果の取得
+        let all_result = result.reduce((acc, curr) => {
+          if ('value' in curr) {
+            Object.assign(acc, curr.value);
+          }
+          return acc;
+        }, {});
+        //表示エリアに表示
+        let result_disp = $('#to_home p');
+        result_disp.empty();
+        $.each(all_result, function (key, value) {
+          if (!(key === 'save' || key === 'error')) {
+            let message = $('#to_home').data(`${key}_${value.status}`);
+            let p = $('<p></p>').addClass(value.status).text(message);
+            result_disp.append(p);
+          } else if (key === 'error') {
+            let p = $('<p></p>').addClass(value.status).text(value.message);
+            result_disp.append(p);
+          }
+        });
+      })
+      .catch((error) => {
+        // エラーハンドリング
+        console.error("エラーが発生しました: ", error);
+        let p = $('<p></p>').addClass('error').text("エラーが発生しました。");
+        result_disp.append(p);
+      })
+      .finally(() => {
+        //画面遷移
+        figure_elm.removeClass('appear');
+        figure_elm.next().addClass('appear');
+        //プログレスエリアの処理
+        process_change(figure_elm.next(), true);
+      });
+
   });
 
   //ホームに戻るボタンの処理
   $('#to_home').on('submit', function (e) {
     e.preventDefault();
+    let redirectUrl = $(this).data('selected_page');
     //画面遷移
-    $(this).parent().removeClass('appear');
-    $(this).parent().siblings('.first_appear').addClass('appear');
+    // $(this).parent().removeClass('appear');
+    // $(this).parent().siblings('.first_appear').addClass('appear');
+    //プログレスエリアの処理
+    // $('.wp-block-itmar-design-process').find('li').each(function (index) {
+    //   if (index > 0) {
+    //     $(this).removeClass('ready');
+    //   }
+    // });
+    //リダイレクト
+    window.location.href = redirectUrl;
   });
 });
