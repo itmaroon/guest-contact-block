@@ -129,11 +129,11 @@ function Edit({
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
     group: "settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: "\u304A\u554F\u5408\u305B\u60C5\u5831\u901A\u77E5\u30E1\u30FC\u30EB",
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inquiry information notification email", 'itmar_guest_contact_block'),
     initialOpen: true,
     className: "mailinfo_ctrl"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
-    label: "\u901A\u77E5\u5148\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\uFF08\u9001\u4FE1\u5143\uFF09",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Notification email address (sender)", 'itmar_guest_contact_block'),
     value: master_mail_editing,
     onChange: newVal => setMasterMailValue(newVal) // 一時的な編集値として保存する
     ,
@@ -154,7 +154,7 @@ function Edit({
       }
     }
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
-    label: "\u901A\u77E5\u30E1\u30FC\u30EB\u306E\u6A19\u984C",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Notification email subject", 'itmar_guest_contact_block'),
     value: subject_info_editing,
     onChange: newVal => setSubjectInfoValue(newVal) // 一時的な編集値として保存する
     ,
@@ -582,7 +582,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"itmar/guest-contact-block","version":"0.1.0","title":"Guest Contact Block","category":"media","description":"メール送信フォームを備えたブロックです。","supports":{"multiple":false,"html":false},"attributes":{"master_mail":{"type":"string","default":"master@sample.com"},"subject_info":{"type":"string","default":"お問合せが入りました。"},"message_info":{"type":"string","default":"以下の内容でお問合せが入りました。"},"ret_mail":{"type":"string","default":""},"subject_ret":{"type":"string","default":"お問合せいただきありがとうございます。"},"message_ret":{"type":"string","default":"以下の内容でお問合せを受け付けました。"},"is_retmail":{"type":"boolean","default":true},"is_dataSave":{"type":"boolean","default":true},"state_process":{"type":"string","default":"input"}},"providesContext":{"itmar/state_process":"state_process"},"textdomain":"guest-contact-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"itmar/guest-contact-block","version":"0.1.0","title":"Guest Contact Block","category":"media","description":"メール送信フォームを備えたブロックです。","supports":{"multiple":false,"html":false},"attributes":{"master_mail":{"type":"string","default":"master@sample.com"},"subject_info":{"type":"string","default":"お問合せが入りました。"},"message_info":{"type":"string","default":"以下の内容でお問合せが入りました。"},"ret_mail":{"type":"string","default":""},"subject_ret":{"type":"string","default":"お問合せいただきありがとうございます。"},"message_ret":{"type":"string","default":"以下の内容でお問合せを受け付けました。"},"is_retmail":{"type":"boolean","default":true},"is_dataSave":{"type":"boolean","default":true},"state_process":{"type":"string","default":"input"}},"providesContext":{"itmar/state_process":"state_process"},"textdomain":"guest-contact-block","editorScript":"text_domain_handle","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 

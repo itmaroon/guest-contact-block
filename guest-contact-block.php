@@ -9,14 +9,29 @@
  * Author:            WebクリエイターITmaroon
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       guest-contact-block
+ * Text Domain:       itmar_guest_contact_block
+ * Domain Path:  			/languages
  *
  * @package           itmar
  */
 
 
 function itmar_contact_block_block_init() {
+	// スクリプトの登録
+	wp_register_script(
+		'text_domain_handle',
+		plugins_url( 'build/index.js', __FILE__ ),
+		array( 'wp-blocks', 'wp-element', 'wp-i18n', 'wp-block-editor' )
+	);
+
+	//ブロックの登録
 	register_block_type( __DIR__ . '/build' );
+
+	// その後、このハンドルを使用してスクリプトの翻訳をセット
+	wp_set_script_translations( 'text_domain_handle', 'itmar_guest_contact_block', plugin_dir_path( __FILE__ ) . 'languages' );
+	
+	//PHP用のテキストドメインの読込（国際化）
+	load_plugin_textdomain( 'itmar_guest_contact_block', false, basename( dirname( __FILE__ ) ) . '/languages' );
 }
 add_action( 'init', 'itmar_contact_block_block_init' );
 
@@ -38,6 +53,7 @@ function itmar_contact_block_add_js() {
 			'ajaxURL' => esc_url( admin_url( 'admin-ajax.php', __FILE__ ) ),
 		));
 	}
+	
 }
 
 add_action('enqueue_block_assets', 'itmar_contact_block_add_js');

@@ -100,10 +100,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	return (
 		<>
 			<InspectorControls group="settings">
-				<PanelBody title="お問合せ情報通知メール" initialOpen={true} className="mailinfo_ctrl">
+				<PanelBody title={__("Inquiry information notification email", 'itmar_guest_contact_block')} initialOpen={true} className="mailinfo_ctrl">
 					<PanelRow>
 						<TextControl
-							label="通知先メールアドレス（送信元）"
+							label={__("Notification email address (sender)", 'itmar_guest_contact_block')}
 							value={master_mail_editing}
 							onChange={(newVal) => setMasterMailValue(newVal)}// 一時的な編集値として保存する
 							onBlur={() => {
@@ -125,7 +125,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</PanelRow>
 					<PanelRow>
 						<TextControl
-							label="通知メールの標題"
+							label={__("Notification email subject", 'itmar_guest_contact_block')}
 							value={subject_info_editing}
 							onChange={(newVal) => setSubjectInfoValue(newVal)}// 一時的な編集値として保存する
 							onBlur={() => {

@@ -17,5 +17,8 @@
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^26.8.0"
+	},
+	"dependencies": {
+		"po2json": "^0.4.5"
 	}
 }
