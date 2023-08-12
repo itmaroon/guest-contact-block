@@ -52,7 +52,7 @@
 		"itmar/state_process": "state_process"
 	},
 	"textdomain": "guest-contact-block",
-	"editorScript": "text_domain_handle",
+	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css"
 }

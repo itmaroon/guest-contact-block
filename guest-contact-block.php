@@ -2,11 +2,11 @@
 /**
  * Plugin Name:       Guest Contact Block
  * Plugin URI:        https://itmaroon.net
- * Description:       メール送信フォームを備えたブロックです。
+ * Description:       A block with an email submission form.
  * Requires at least: 6.1
  * Requires PHP:      7.0
  * Version:           0.1.0
- * Author:            WebクリエイターITmaroon
+ * Author:            Web Creator ITmaroon
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       itmar_guest_contact_block
@@ -17,18 +17,23 @@
 
 
 function itmar_contact_block_block_init() {
+	$script_handle = 'text_domain_handle';
 	// スクリプトの登録
 	wp_register_script(
-		'text_domain_handle',
+		$script_handle,
 		plugins_url( 'build/index.js', __FILE__ ),
 		array( 'wp-blocks', 'wp-element', 'wp-i18n', 'wp-block-editor' )
 	);
 
 	//ブロックの登録
-	register_block_type( __DIR__ . '/build' );
+	register_block_type( __DIR__ . '/build',
+		array(
+			'editor_script' => $script_handle
+		)
+	);
 
 	// その後、このハンドルを使用してスクリプトの翻訳をセット
-	wp_set_script_translations( 'text_domain_handle', 'itmar_guest_contact_block', plugin_dir_path( __FILE__ ) . 'languages' );
+	wp_set_script_translations( $script_handle, 'itmar_guest_contact_block', plugin_dir_path( __FILE__ ) . 'languages' );
 	
 	//PHP用のテキストドメインの読込（国際化）
 	load_plugin_textdomain( 'itmar_guest_contact_block', false, basename( dirname( __FILE__ ) ) . '/languages' );
@@ -77,7 +82,7 @@ function itmar_contact_send_ajax(){
 
 		// バリデーション
 		if ( ! is_email( $to ) || ! is_email( $reply ) || empty( $subject ) || empty( $message ) ) {
-			$response['error'] = array('status' => 'error', 'message' => 'サーバーで入力項目に不備が発見されました。登録処理は中断されました。');
+			$response['error'] = array('status' => 'error', 'message' =>  __('The server detected an error in the input item. Registration process was interrupted. ', 'itmar_guest_contact_block'));
 			echo json_encode($response);
 			die();
 		}
@@ -115,20 +120,20 @@ function itmar_contact_send_ajax(){
 		// メールを送信
 		if (wp_mail($to, $subject, $message, $headers)) {
 			if($is_retMail){
-				$response['ret_mail'] = array('status' => 'success', 'message' => '自動応答メールが正常に送信されました。');
+				$response['ret_mail'] = array('status' => 'success', 'message' => __("Your autoresponder email has been successfully sent.", 'itmar_guest_contact_block'));
 			}else{
-				$response['info_mail'] = array('status' => 'success', 'message' => 'サイト管理者に正常に通知されました。');
+				$response['info_mail'] = array('status' => 'success', 'message' =>  __("The site administrator has been successfully notified.", 'itmar_guest_contact_block'));
 			}
 		} else {
 			if($is_retMail){
-				$response['ret_mail'] = array('status' => 'error', 'message' => '自動応答メールの送信に失敗しました。');
+				$response['ret_mail'] = array('status' => 'error', 'message' =>  __('Failed to send auto-response email.', 'itmar_guest_contact_block'));
 			}else{
-				$response['info_mail'] = array('status' => 'error', 'message' => 'サイト管理者への通知に失敗しました。');
+				$response['info_mail'] = array('status' => 'error', 'message' =>  __('Failed to notify site administrator.', 'itmar_guest_contact_block'));
 			}
     		
 		}
   }else {
-		$response['error'] = array('status' => 'error', 'message' => '不正なリクエストです。');
+		$response['error'] = array('status' => 'error', 'message' =>  __('Invalid request.', 'itmar_guest_contact_block'));
 	}
 	//結果を通知して終了
 	echo json_encode($response);
@@ -142,7 +147,7 @@ function itmar_contact_save($user_id, $message){
 	$new_post = array(
 		'post_type'   => 'gcb_contact',//登録するカスタム投稿タイプ
 		'post_status' => 'private',//公開ステータス（ここは個人情報なので非公開に）
-		'post_title'  => 'お問合せデータ',//タイトルは分かりやすいものに
+		'post_title'  =>  __('Inquiry Data', 'itmar_guest_contact_block'),//タイトルは分かりやすいものに
 		'post_author' =>  $user_id
 	);
 	$post_id = wp_insert_post( $new_post, true );
@@ -155,7 +160,7 @@ function itmar_contact_save($user_id, $message){
 		update_post_meta( $post_id, 'send_date', current_time('mysql') );
 		update_post_meta( $post_id, 'message', $message );
 
-		return array('status' => 'success', 'message' => '受付処理が正常に完了しました。');
+		return array('status' => 'success', 'message' =>  __('Receipt processing completed successfully.', 'itmar_guest_contact_block'));
 	}
 }
 

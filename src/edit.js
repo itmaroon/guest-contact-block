@@ -111,7 +111,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								if (master_mail_editing.length == 0 || !mail_pattern.test(master_mail_editing)) {
 									dispatch('core/notices').createNotice(
 										'error',
-										'通知先メールアドレスが空欄または形式が不正です。',
+										__('The notification email address is blank or has an invalid format. ', 'itmar_guest_contact_block'),
 										{ type: 'snackbar', isDismissible: true, }
 									);
 									// バリデーションエラーがある場合、編集値を元の値にリセットする
@@ -132,7 +132,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								if (subject_info_editing.length == 0) {
 									dispatch('core/notices').createNotice(
 										'error',
-										'通知メールの標題は空欄にしないでください。',
+										__('Do not leave the subject of the notification email blank. ', 'itmar_guest_contact_block'),
 										{ type: 'snackbar', isDismissible: true, }
 									);
 									// バリデーションエラーがある場合、編集値を元の値にリセットする
@@ -146,14 +146,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</PanelRow>
 					<PanelRow>
 						<TextareaControl
-							label="通知メール本文"
+							label={__("Notification email body", 'itmar_guest_contact_block')}
 							value={message_info_editing}
 							onChange={(newVal) => setMessageInfoValue(newVal)}// 一時的な編集値として保存する
 							onBlur={() => {
 								if (message_info_editing.length == 0) {
 									dispatch('core/notices').createNotice(
 										'error',
-										'通知メールの本文は空欄にしないでください。',
+										__('Do not leave the body of the notification email blank. ', 'itmar_guest_contact_block'),
 										{ type: 'snackbar', isDismissible: true, }
 									);
 									// バリデーションエラーがある場合、編集値を元の値にリセットする
@@ -164,7 +164,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								}
 							}}
 							rows="5"
-							help="下に表示されている入力項目をクリックすると本文に引用されます。"
+							help={__("Click the input item displayed below to quote it in the text.", 'itmar_guest_contact_block')}
 						/>
 					</PanelRow>
 					{inputInnerBlocks.map((input_elm, index) => {

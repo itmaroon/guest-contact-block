@@ -140,7 +140,7 @@ function Edit({
     onBlur: () => {
       //メールバリデーションチェック
       if (master_mail_editing.length == 0 || !mail_pattern.test(master_mail_editing)) {
-        (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.dispatch)('core/notices').createNotice('error', '通知先メールアドレスが空欄または形式が不正です。', {
+        (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.dispatch)('core/notices').createNotice('error', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The notification email address is blank or has an invalid format. ', 'itmar_guest_contact_block'), {
           type: 'snackbar',
           isDismissible: true
         });
@@ -160,7 +160,7 @@ function Edit({
     ,
     onBlur: () => {
       if (subject_info_editing.length == 0) {
-        (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.dispatch)('core/notices').createNotice('error', '通知メールの標題は空欄にしないでください。', {
+        (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.dispatch)('core/notices').createNotice('error', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Do not leave the subject of the notification email blank. ', 'itmar_guest_contact_block'), {
           type: 'snackbar',
           isDismissible: true
         });
@@ -174,13 +174,13 @@ function Edit({
       }
     }
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextareaControl, {
-    label: "\u901A\u77E5\u30E1\u30FC\u30EB\u672C\u6587",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Notification email body", 'itmar_guest_contact_block'),
     value: message_info_editing,
     onChange: newVal => setMessageInfoValue(newVal) // 一時的な編集値として保存する
     ,
     onBlur: () => {
       if (message_info_editing.length == 0) {
-        (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.dispatch)('core/notices').createNotice('error', '通知メールの本文は空欄にしないでください。', {
+        (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.dispatch)('core/notices').createNotice('error', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Do not leave the body of the notification email blank. ', 'itmar_guest_contact_block'), {
           type: 'snackbar',
           isDismissible: true
         });
@@ -194,7 +194,7 @@ function Edit({
       }
     },
     rows: "5",
-    help: "\u4E0B\u306B\u8868\u793A\u3055\u308C\u3066\u3044\u308B\u5165\u529B\u9805\u76EE\u3092\u30AF\u30EA\u30C3\u30AF\u3059\u308B\u3068\u672C\u6587\u306B\u5F15\u7528\u3055\u308C\u307E\u3059\u3002"
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Click the input item displayed below to quote it in the text.", 'itmar_guest_contact_block')
   })), inputInnerBlocks.map((input_elm, index) => {
     const actions = [{
       label: '👆',
@@ -582,7 +582,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"itmar/guest-contact-block","version":"0.1.0","title":"Guest Contact Block","category":"media","description":"メール送信フォームを備えたブロックです。","supports":{"multiple":false,"html":false},"attributes":{"master_mail":{"type":"string","default":"master@sample.com"},"subject_info":{"type":"string","default":"お問合せが入りました。"},"message_info":{"type":"string","default":"以下の内容でお問合せが入りました。"},"ret_mail":{"type":"string","default":""},"subject_ret":{"type":"string","default":"お問合せいただきありがとうございます。"},"message_ret":{"type":"string","default":"以下の内容でお問合せを受け付けました。"},"is_retmail":{"type":"boolean","default":true},"is_dataSave":{"type":"boolean","default":true},"state_process":{"type":"string","default":"input"}},"providesContext":{"itmar/state_process":"state_process"},"textdomain":"guest-contact-block","editorScript":"text_domain_handle","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"itmar/guest-contact-block","version":"0.1.0","title":"Guest Contact Block","category":"media","description":"メール送信フォームを備えたブロックです。","supports":{"multiple":false,"html":false},"attributes":{"master_mail":{"type":"string","default":"master@sample.com"},"subject_info":{"type":"string","default":"お問合せが入りました。"},"message_info":{"type":"string","default":"以下の内容でお問合せが入りました。"},"ret_mail":{"type":"string","default":""},"subject_ret":{"type":"string","default":"お問合せいただきありがとうございます。"},"message_ret":{"type":"string","default":"以下の内容でお問合せを受け付けました。"},"is_retmail":{"type":"boolean","default":true},"is_dataSave":{"type":"boolean","default":true},"state_process":{"type":"string","default":"input"}},"providesContext":{"itmar/state_process":"state_process"},"textdomain":"guest-contact-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 
