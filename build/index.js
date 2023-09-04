@@ -195,7 +195,7 @@ function Edit({
     },
     rows: "5",
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Click the input item displayed below to quote it in the text.", 'itmar_guest_contact_block')
-  })), inputInnerBlocks.map((input_elm, index) => {
+  })), inputInnerBlocks.filter(block => block.name !== 'itmar/design-checkbox').map((input_elm, index) => {
     const actions = [{
       label: '👆',
       onClick: () => {

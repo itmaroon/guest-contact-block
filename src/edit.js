@@ -167,8 +167,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							help={__("Click the input item displayed below to quote it in the text.", 'itmar_guest_contact_block')}
 						/>
 					</PanelRow>
-					{inputInnerBlocks.map((input_elm, index) => {
-
+					{inputInnerBlocks.filter(block => block.name !== 'itmar/design-checkbox').map((input_elm, index) => {
 						const actions = [
 							{
 								label: '👆',
