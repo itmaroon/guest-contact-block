@@ -1,4 +1,33 @@
 jQuery(function ($) {
+  //確認画面遷移のボタンの有効化
+  $(document).ready(function () {
+    // チェックボックスの状態を評価してsubmitボタンの状態を更新する関数
+    function evaluateCheckboxes() {
+      // 全てのチェックボックスが選択されているかチェック
+      var allChecked = true;
+      $('#to_confirm_form input[type="checkbox"][data-is_proceed="true"]').each(function () {
+        if (!$(this).prop('checked')) {
+          allChecked = false;
+          return false; // eachループを抜ける
+        }
+      });
+
+      if (!allChecked) {
+        // 一つでもチェックされていなければ、submitボタンを無効化
+        $('#to_confirm_form input[type="submit"]').prop('disabled', true);
+      } else {
+        // すべてチェックされていれば、submitボタンを有効化
+        $('#to_confirm_form input[type="submit"]').prop('disabled', false);
+      }
+    };
+
+    // ページ読み込み時に関数を実行
+    evaluateCheckboxes();
+
+    // チェックボックスの変更時に関数を実行
+    $('#to_confirm_form input[type="checkbox"][data-is_proceed="true"]').on('change', evaluateCheckboxes)
+  });
+
   //メール送信関数
   const sendMail_ajax = (send_email, subject_mail, message_mail, master_email, is_dataSave, is_retMail) => {
     //noceの取得
@@ -75,15 +104,16 @@ jQuery(function ($) {
 
   }
 
-  //formの送信ボタンが押されたときの処理
+  //formの確認画面へボタンが押されたときの処理
   $('#to_confirm_form').on('submit', function (e) {
+
     e.preventDefault();
     let err_flg = false;//エラーフラグをセット
     //バリデーションチェック
     $(this).find('label').each(function () {
       let required = $(this).data('required');
       if (required) {
-        if ($(this).next().val().length == 0) {
+        if ($(this).prev().val().length == 0) {
           let err_msg_elm = $('<div class="err_msg">入力必須の項目です</div>')
           $(this).parent().append(err_msg_elm);
           err_flg = true;
@@ -103,25 +133,17 @@ jQuery(function ($) {
     let input_elm = $(this).find('input:not([type="submit"]), textarea')
     input_elm.each(function (index) {
       let input_val = $(this).val();
-      $('#send_exec').find('tr').eq(index).find('td').text(input_val);
+      $('#itmar_send_exec').find('tr').eq(index).find('td').text(input_val);
     });
   });
 
-  //送信ボタンの実行かキャンセルか
-  let send_click_btn;
-  $("#send_exec_btn").click(function () {
-    send_click_btn = "send_exec_btn";
-  });
 
-  $("#send_cancel_btn").click(function () {
-    send_click_btn = "send_cancel_btn";
-  });
-
-
-  $('#send_exec').on('submit', function (e) {
+  //実行またはキャンセルボタンが押されたときの処理
+  $('#itmar_send_exec').on('submit', function (e) {
     e.preventDefault();
+    const click_id = e.originalEvent.submitter.id;
     //キャンセルボタンなら元に戻して終了
-    if (send_click_btn === 'send_cancel_btn') {
+    if (click_id === $(this).data('cancel_id')) {
       $(this).parent().removeClass('appear');
       $(this).parent().prev().addClass('appear');
       //プログレスエリアの処理

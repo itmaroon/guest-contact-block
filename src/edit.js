@@ -167,7 +167,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							help={__("Click the input item displayed below to quote it in the text.", 'itmar_guest_contact_block')}
 						/>
 					</PanelRow>
-					{inputInnerBlocks.filter(block => block.name !== 'itmar/design-checkbox').map((input_elm, index) => {
+					{inputInnerBlocks.filter(block => block.name !== 'itmar/design-checkbox' && block.name !== 'itmar/design-button').map((input_elm, index) => {
 						const actions = [
 							{
 								label: '👆',
@@ -205,7 +205,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									help="下に表示されているメールアドレスをクリックすると応答先がセットされます"
 								/>
 							</PanelRow>
-							{inputInnerBlocks.map((input_elm, index) => {
+							{inputInnerBlocks.filter(block => block.name !== 'itmar/design-checkbox' && block.name !== 'itmar/design-button').map((input_elm, index) => {
 								if (input_elm.attributes.inputType === 'email') {
 									const actions = [
 										{
@@ -266,7 +266,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									help="下に表示されている入力項目をクリックすると本文に引用されます。"
 								/>
 							</PanelRow>
-							{inputInnerBlocks.map((input_elm, index) => {
+							{inputInnerBlocks.filter(block => block.name !== 'itmar/design-checkbox' && block.name !== 'itmar/design-button').map((input_elm, index) => {
 
 								const actions = [
 									{

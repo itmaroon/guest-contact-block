@@ -195,7 +195,7 @@ function Edit({
     },
     rows: "5",
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Click the input item displayed below to quote it in the text.", 'itmar_guest_contact_block')
-  })), inputInnerBlocks.filter(block => block.name !== 'itmar/design-checkbox').map((input_elm, index) => {
+  })), inputInnerBlocks.filter(block => block.name !== 'itmar/design-checkbox' && block.name !== 'itmar/design-button').map((input_elm, index) => {
     const actions = [{
       label: '👆',
       onClick: () => {
@@ -229,7 +229,7 @@ function Edit({
       ret_mail: newVal
     }),
     help: "\u4E0B\u306B\u8868\u793A\u3055\u308C\u3066\u3044\u308B\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u3092\u30AF\u30EA\u30C3\u30AF\u3059\u308B\u3068\u5FDC\u7B54\u5148\u304C\u30BB\u30C3\u30C8\u3055\u308C\u307E\u3059"
-  })), inputInnerBlocks.map((input_elm, index) => {
+  })), inputInnerBlocks.filter(block => block.name !== 'itmar/design-checkbox' && block.name !== 'itmar/design-button').map((input_elm, index) => {
     if (input_elm.attributes.inputType === 'email') {
       const actions = [{
         label: '👆',
@@ -287,7 +287,7 @@ function Edit({
     },
     rows: "5",
     help: "\u4E0B\u306B\u8868\u793A\u3055\u308C\u3066\u3044\u308B\u5165\u529B\u9805\u76EE\u3092\u30AF\u30EA\u30C3\u30AF\u3059\u308B\u3068\u672C\u6587\u306B\u5F15\u7528\u3055\u308C\u307E\u3059\u3002"
-  })), inputInnerBlocks.map((input_elm, index) => {
+  })), inputInnerBlocks.filter(block => block.name !== 'itmar/design-checkbox' && block.name !== 'itmar/design-button').map((input_elm, index) => {
     const actions = [{
       label: '👆',
       onClick: () => {
