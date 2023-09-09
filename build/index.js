@@ -106,7 +106,12 @@ function Edit({
   //インナーブロックの制御
   const TEMPLATE = [
   //同一ブロックを２つ以上入れないこと（名称の文字列が重ならないこと）
-  ['itmar/design-process', {}], ['itmar/input-figure-block', {}], ['itmar/confirm-figure-block', {}], ['itmar/thanks-figure-block', {}]];
+  ['itmar/design-process', {}], ['itmar/input-figure-block', {}], ['itmar/confirm-figure-block', {}], ['itmar/thanks-figure-block', {
+    infomail_success: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("The person in charge has been notified of your inquiry. Please wait for a while until we reply.", 'itmar_guest_contact_block'),
+    infomail_faile: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Email notification to the person in charge failed.", 'itmar_guest_contact_block'),
+    retmail_success: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("We have sent an automatic response email to you, so please check it.", 'itmar_guest_contact_block'),
+    retmail_faile: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to send automatic response email to you.", 'itmar_guest_contact_block')
+  }]];
   const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useInnerBlocksProps)({}, {
     template: TEMPLATE,
     templateLock: true

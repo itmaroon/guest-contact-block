@@ -3,6 +3,21 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
+.mailinfo_ctrl {
+	.components-notice {
+		padding-right: 0;
+
+		.components-notice__content {
+			margin: 0;
+
+			.components-button {
+				margin: 0;
+				box-shadow: none;
+			}
+
+		}
+	}
+}
 
 .wp-block-itmar-guest-contact-block {
 	border: 1px dotted #f00;

@@ -41,6 +41,10 @@ function itmar_contact_block_block_init() {
 add_action( 'init', 'itmar_contact_block_block_init' );
 
 function itmar_contact_block_add_js() {
+	//jquery-easingを読み込む
+	if (!wp_script_is('itmar_jquery_easing', 'enqueued')) {
+		wp_enqueue_script( 'itmar_jquery_easing', plugins_url('assets/jquery.easing.min.js', __FILE__ ), array('jquery' ), true );
+	}
 	//管理画面以外（フロントエンド側でのみ読み込む）
 	if (!is_admin()) {
 		$script_path = plugin_dir_path(__FILE__) . 'assets/contact_block.js';

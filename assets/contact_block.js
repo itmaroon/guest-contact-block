@@ -1,3 +1,4 @@
+
 jQuery(function ($) {
   //確認画面遷移のボタンの有効化
   $(document).ready(function () {
@@ -104,10 +105,66 @@ jQuery(function ($) {
 
   }
 
+  //アニメーション関連パラメータ
+
+  let animating = false; //flag to prevent quick multi-click glitches
+  //ページのセット
+  let fieldset_objs = $('.figure_fieldset');
+  //プロセスエリアのセット
+  let process_area = $('.wp-block-itmar-design-process');
+  //プログレスバーの高さ
+  let progress_height = process_area ? process_area.outerHeight(true) : 0;
+
+  //スライドのアニメーション
+  const processAnimation = (current_fs, change_fs, top_margin, next) => {
+    //show the next fieldset
+    change_fs.show();
+    if (next) {
+      change_fs.css({ 'position': 'absolute' });
+    } else {
+      current_fs.css({ 'position': 'absolute' });
+    }
+
+
+    let left, opacity, scale; //fieldset properties which we will animate
+
+    current_fs.animate({ opacity: 0 }, {
+      step: function (now) {
+        //as the opacity of current_fs reduces to 0 - stored in "now"
+        //1. scale current_fs down to 80%
+        scale = next ? 1 - (1 - now) * 0.2 : 0.8 + (1 - now) * 0.2;
+        //2. bring change_fs from the right(50%)
+        left = next ? (now * 50) + "%" : ((1 - now) * 50) + "%";
+        //3. increase opacity of change_fs to 1 as it moves in
+        opacity = 1 - now;
+        if (next) {
+          current_fs.css({ 'transform': 'scale(' + scale + ')' });
+          change_fs.css({ 'top': top_margin, 'left': left, 'opacity': opacity });
+        } else {
+          current_fs.css({ 'top': progress_height, 'left': left, });
+          change_fs.css({ 'transform': 'scale(' + scale + ')', 'opacity': opacity });
+        }
+
+      },
+      duration: 800,
+      complete: function () {
+        current_fs.hide();
+        animating = false;
+        change_fs.css({ 'position': 'static' });
+      },
+      //this comes from the custom easing plugin
+      easing: 'easeInOutBack',
+    });
+  }
+
   //formの確認画面へボタンが押されたときの処理
   $('#to_confirm_form').on('submit', function (e) {
-
     e.preventDefault();
+
+    //アニメーション中ならリターン
+    if (animating) return false;
+    animating = true;
+
     let err_flg = false;//エラーフラグをセット
     //バリデーションチェック
     $(this).find('label').each(function () {
@@ -123,9 +180,12 @@ jQuery(function ($) {
       }
     })
     if (err_flg) return;//エラーフラグがtrueなら処理終了
+
+
     //次の画面に遷移
-    $(this).parent().removeClass('appear');
-    $(this).parent().next().addClass('appear');
+    //アニメーションの実行
+    processAnimation(fieldset_objs.eq(0), fieldset_objs.eq(1), progress_height, true);
+
     //プログレスエリアの処理
     process_change($(this).parent().next(), true);
 
@@ -141,11 +201,18 @@ jQuery(function ($) {
   //実行またはキャンセルボタンが押されたときの処理
   $('#itmar_send_exec').on('submit', function (e) {
     e.preventDefault();
+
+    //アニメーション中ならリターン
+    if (animating) return false;
+    animating = true;
+
+    //押されたボタンの取得
     const click_id = e.originalEvent.submitter.id;
+
     //キャンセルボタンなら元に戻して終了
     if (click_id === $(this).data('cancel_id')) {
-      $(this).parent().removeClass('appear');
-      $(this).parent().prev().addClass('appear');
+      //アニメーションの実行
+      processAnimation(fieldset_objs.eq(1), fieldset_objs.eq(0), progress_height, false);
       //プログレスエリアの処理
       process_change($(this).parent(), false);
       return;
@@ -163,6 +230,9 @@ jQuery(function ($) {
     let is_dataSave = parent_block.data('is_datasave');
     //message_infoの再構築
     message_info = message_rebuild(message_info);
+    //ローディングマークを出す
+    const { __ } = wp.i18n;
+    dispLoading(__("sending...", 'itmar_guest_contact_block'), $('#itmar_send_exec'));
     //通知メールの送信
     promises.push(sendMail_ajax(master_email, subject_info, message_info, master_email, false, false));
     //自動応答メール
@@ -212,9 +282,10 @@ jQuery(function ($) {
         result_disp.append(p);
       })
       .finally(() => {
-        //画面遷移
-        figure_elm.removeClass('appear');
-        figure_elm.next().addClass('appear');
+        //ローディングマーク消去
+        removeLoading('', $('#itmar_send_exec'));
+        //アニメーションの実行
+        processAnimation(fieldset_objs.eq(1), fieldset_objs.eq(2), progress_height, true);
         //プログレスエリアの処理
         process_change(figure_elm.next(), true);
       });

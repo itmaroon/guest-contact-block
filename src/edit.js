@@ -72,7 +72,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		['itmar/design-process', {}],
 		['itmar/input-figure-block', {}],
 		['itmar/confirm-figure-block', {}],
-		['itmar/thanks-figure-block', {}]
+		['itmar/thanks-figure-block', {
+			infomail_success: __("The person in charge has been notified of your inquiry. Please wait for a while until we reply.", 'itmar_guest_contact_block'),
+			infomail_faile: __("Email notification to the person in charge failed.", 'itmar_guest_contact_block'),
+			retmail_success: __("We have sent an automatic response email to you, so please check it.", 'itmar_guest_contact_block'),
+			retmail_faile: __("Failed to send automatic response email to you.", 'itmar_guest_contact_block'),
+		}]
 	];
 	const innerBlocksProps = useInnerBlocksProps(
 		{},
