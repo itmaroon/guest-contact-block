@@ -51,7 +51,7 @@
   "providesContext": {
     "itmar/state_process": "state_process"
   },
-  "textdomain": "guest-contact-block",
+  "textdomain": "itmar_guest_contact_block",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css"
