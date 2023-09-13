@@ -1,9 +1,11 @@
 
 import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
-
+import { marginProperty, paddingProperty } from './styleProperty';
 
 export default function save({ attributes }) {
 	const {
+		margin_value,
+		padding_value,
 		master_mail,
 		subject_info,
 		message_info,
@@ -14,10 +16,18 @@ export default function save({ attributes }) {
 		is_dataSave
 	} = attributes;
 
+	//ブロックのスタイル設定
+	const margin_obj = marginProperty(margin_value);
+	const padding_obj = paddingProperty(padding_value);
+	const blockStyle = { overflow: 'hidden', ...margin_obj, ...padding_obj }
+
+	const blockProps = useBlockProps.save({
+		style: blockStyle,
+	});
 
 	return (
 		<div
-			{...useBlockProps.save()}
+			{...blockProps}
 			data-master_mail={master_mail}
 			data-subject_info={subject_info}
 			data-message_info={message_info}

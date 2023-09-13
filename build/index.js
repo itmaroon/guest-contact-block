@@ -93,6 +93,8 @@ function Edit({
   clientId
 }) {
   const {
+    margin_value,
+    padding_value,
     master_mail,
     subject_info,
     message_info,
@@ -102,6 +104,19 @@ function Edit({
     is_retmail,
     is_dataSave
   } = attributes;
+
+  //ブロックのスタイル設定
+  const margin_obj = (0,_styleProperty__WEBPACK_IMPORTED_MODULE_6__.marginProperty)(margin_value);
+  const padding_obj = (0,_styleProperty__WEBPACK_IMPORTED_MODULE_6__.paddingProperty)(padding_value);
+  const blockStyle = {
+    ...margin_obj,
+    ...padding_obj
+  };
+
+  //ルート要素にスタイルを付加	
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
+    style: blockStyle
+  });
 
   //インナーブロックの制御
   const TEMPLATE = [
@@ -217,23 +232,23 @@ function Edit({
       isDismissible: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, input_elm.attributes.labelContent));
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: "\u81EA\u52D5\u5FDC\u7B54\u30E1\u30FC\u30EB",
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Automatic response email", 'itmar_guest_contact_block'),
     initialOpen: true,
     className: "mailinfo_ctrl"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
-    label: "\u81EA\u52D5\u5FDC\u7B54\u30E1\u30FC\u30EB\u3092\u767A\u4FE1\u3059\u308B",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Send automatic response email', 'itmar_guest_contact_block'),
     checked: is_retmail,
     onChange: newVal => setAttributes({
       is_retmail: newVal
     })
   })), is_retmail && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
-    label: "\u5FDC\u7B54\u5148\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reply to email address", 'itmar_guest_contact_block'),
     value: ret_mail,
     isPressEnterToChange: true,
     onChange: newVal => setAttributes({
       ret_mail: newVal
     }),
-    help: "\u4E0B\u306B\u8868\u793A\u3055\u308C\u3066\u3044\u308B\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u3092\u30AF\u30EA\u30C3\u30AF\u3059\u308B\u3068\u5FDC\u7B54\u5148\u304C\u30BB\u30C3\u30C8\u3055\u308C\u307E\u3059"
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Click on the email address displayed below to set the response destination.", 'itmar_guest_contact_block')
   })), inputInnerBlocks.filter(block => block.name !== 'itmar/design-checkbox' && block.name !== 'itmar/design-button').map((input_elm, index) => {
     if (input_elm.attributes.inputType === 'email') {
       const actions = [{
@@ -251,13 +266,13 @@ function Edit({
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, input_elm.attributes.labelContent));
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
-    label: "\u81EA\u52D5\u5FDC\u7B54\u30E1\u30FC\u30EB\u306E\u6A19\u984C",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Automatic response email title", 'itmar_guest_contact_block'),
     value: subject_ret_editing,
     onChange: newVal => setSubjectRetValue(newVal) // 一時的な編集値として保存する
     ,
     onBlur: () => {
       if (subject_ret_editing.length == 0) {
-        (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.dispatch)('core/notices').createNotice('error', '通知メールの標題は空欄にしないでください。', {
+        (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.dispatch)('core/notices').createNotice('error', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Do not leave the subject of the notification email blank. ', 'itmar_guest_contact_block'), {
           type: 'snackbar',
           isDismissible: true
         });
@@ -271,13 +286,13 @@ function Edit({
       }
     }
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextareaControl, {
-    label: "\u81EA\u52D5\u5FDC\u7B54\u30E1\u30FC\u30EB\u672C\u6587",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Automatic response email body", 'itmar_guest_contact_block'),
     value: message_ret_editing,
     onChange: newVal => setMessageRetValue(newVal) // 一時的な編集値として保存する
     ,
     onBlur: () => {
       if (message_ret_editing.length == 0) {
-        (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.dispatch)('core/notices').createNotice('error', '通知メールの標題は空欄にしないでください。', {
+        (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.dispatch)('core/notices').createNotice('error', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Do not leave the subject of the notification email blank. ', 'itmar_guest_contact_block'), {
           type: 'snackbar',
           isDismissible: true
         });
@@ -291,7 +306,7 @@ function Edit({
       }
     },
     rows: "5",
-    help: "\u4E0B\u306B\u8868\u793A\u3055\u308C\u3066\u3044\u308B\u5165\u529B\u9805\u76EE\u3092\u30AF\u30EA\u30C3\u30AF\u3059\u308B\u3068\u672C\u6587\u306B\u5F15\u7528\u3055\u308C\u307E\u3059\u3002"
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Click on the input field below to quote it in the text.", 'itmar_guest_contact_block')
   })), inputInnerBlocks.filter(block => block.name !== 'itmar/design-checkbox' && block.name !== 'itmar/design-button').map((input_elm, index) => {
     const actions = [{
       label: '👆',
@@ -309,13 +324,41 @@ function Edit({
       isDismissible: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, input_elm.attributes.labelContent));
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
-    label: "\u5FDC\u7B54\u306E\u5185\u5BB9\u3092DB\u306B\u4FDD\u5B58\u3059\u308B",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Save response contents to DB', 'itmar_guest_contact_block'),
     checked: is_dataSave,
     onChange: newVal => setAttributes({
       is_dataSave: newVal
     })
-  }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)()
+  }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
+    group: "styles"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Global settings", 'itmar_guest_contact_block'),
+    initialOpen: true,
+    className: "form_design_ctrl"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalBoxControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Margin Setting", 'itmar_guest_contact_block'),
+    values: margin_value,
+    onChange: value => setAttributes({
+      margin_value: value
+    }),
+    units: units // 許可する単位
+    ,
+    allowReset: true // リセットの可否
+    ,
+    resetValues: padding_resetValues // リセット時の値
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalBoxControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding settings", 'itmar_guest_contact_block'),
+    values: padding_value,
+    onChange: value => setAttributes({
+      padding_value: value
+    }),
+    units: units // 許可する単位
+    ,
+    allowReset: true // リセットの可否
+    ,
+    resetValues: padding_resetValues // リセット時の値
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    ...blockProps
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...innerBlocksProps
   })));
@@ -336,9 +379,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
 /* harmony import */ var _envelopes_bulk_solid_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./envelopes-bulk-solid.svg */ "./src/envelopes-bulk-solid.svg");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./edit */ "./src/edit.js");
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./save */ "./src/save.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./block.json */ "./src/block.json");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./edit */ "./src/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./save */ "./src/save.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./block.json */ "./src/block.json");
+
 
 
 
@@ -350,10 +396,30 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_6__.name, {
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_7__.name, {
   icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_envelopes_bulk_solid_svg__WEBPACK_IMPORTED_MODULE_3__.ReactComponent, null),
-  edit: _edit__WEBPACK_IMPORTED_MODULE_4__["default"],
-  save: _save__WEBPACK_IMPORTED_MODULE_5__["default"]
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('This is a block for setting up an inquiry form.', 'itmar_guest_contact_block'),
+  attributes: {
+    ..._block_json__WEBPACK_IMPORTED_MODULE_7__.attributes,
+    subject_info: {
+      type: "string",
+      default: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('We have received an inquiry.', 'itmar_guest_contact_block')
+    },
+    message_info: {
+      type: "string",
+      default: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('We have received an inquiry regarding the following information.', 'itmar_guest_contact_block')
+    },
+    subject_ret: {
+      type: "string",
+      default: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Thank you for contacting us.', 'itmar_guest_contact_block')
+    },
+    message_ret: {
+      type: "string",
+      default: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('We have received your inquiry with the following details.', 'itmar_guest_contact_block')
+    }
+  },
+  edit: _edit__WEBPACK_IMPORTED_MODULE_5__["default"],
+  save: _save__WEBPACK_IMPORTED_MODULE_6__["default"]
 });
 
 /***/ }),
@@ -372,12 +438,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _styleProperty__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styleProperty */ "./src/styleProperty.js");
+
 
 
 function save({
   attributes
 }) {
   const {
+    margin_value,
+    padding_value,
     master_mail,
     subject_info,
     message_info,
@@ -387,8 +457,20 @@ function save({
     is_retmail,
     is_dataSave
   } = attributes;
+
+  //ブロックのスタイル設定
+  const margin_obj = (0,_styleProperty__WEBPACK_IMPORTED_MODULE_2__.marginProperty)(margin_value);
+  const padding_obj = (0,_styleProperty__WEBPACK_IMPORTED_MODULE_2__.paddingProperty)(padding_value);
+  const blockStyle = {
+    overflow: 'hidden',
+    ...margin_obj,
+    ...padding_obj
+  };
+  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
+    style: blockStyle
+  });
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save(),
+    ...blockProps,
     "data-master_mail": master_mail,
     "data-subject_info": subject_info,
     "data-message_info": message_info,
@@ -587,7 +669,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"itmar/guest-contact-block","version":"0.1.0","title":"Guest Contact Block","category":"media","description":"メール送信フォームを備えたブロックです。","supports":{"multiple":false,"html":false},"attributes":{"master_mail":{"type":"string","default":"master@sample.com"},"subject_info":{"type":"string","default":"お問合せが入りました。"},"message_info":{"type":"string","default":"以下の内容でお問合せが入りました。"},"ret_mail":{"type":"string","default":""},"subject_ret":{"type":"string","default":"お問合せいただきありがとうございます。"},"message_ret":{"type":"string","default":"以下の内容でお問合せを受け付けました。"},"is_retmail":{"type":"boolean","default":true},"is_dataSave":{"type":"boolean","default":true},"state_process":{"type":"string","default":"input"}},"providesContext":{"itmar/state_process":"state_process"},"textdomain":"itmar_guest_contact_block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"itmar/guest-contact-block","version":"0.1.0","title":"Guest Contact Block","category":"media","supports":{"multiple":false,"html":false},"attributes":{"margin_value":{"type":"object","default":{"top":"1em","left":"2em","bottom":"1em","right":"2em"}},"padding_value":{"type":"object","default":{"top":"1em","left":"2em","bottom":"1em","right":"2em"}},"master_mail":{"type":"string","default":"master@sample.com"},"ret_mail":{"type":"string","default":""},"is_retmail":{"type":"boolean","default":true},"is_dataSave":{"type":"boolean","default":true},"state_process":{"type":"string","default":"input"}},"providesContext":{"itmar/state_process":"state_process"},"textdomain":"itmar_guest_contact_block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 

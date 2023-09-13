@@ -29,7 +29,7 @@ import './editor.scss';
 
 import { useEffect, useState } from '@wordpress/element';
 import { useSelect, dispatch } from '@wordpress/data';
-import { borderProperty, radiusProperty, marginProperty, paddingProperty } from './styleProperty';
+import { marginProperty, paddingProperty } from './styleProperty';
 
 //スペースのリセットバリュー
 const padding_resetValues = {
@@ -56,7 +56,8 @@ const units = [
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
-
+		margin_value,
+		padding_value,
 		master_mail,
 		subject_info,
 		message_info,
@@ -66,6 +67,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		is_retmail,
 		is_dataSave,
 	} = attributes;
+
+	//ブロックのスタイル設定
+	const margin_obj = marginProperty(margin_value);
+	const padding_obj = paddingProperty(padding_value);
+	const blockStyle = { ...margin_obj, ...padding_obj }
+
+	//ルート要素にスタイルを付加	
+	const blockProps = useBlockProps({
+		style: blockStyle
+	});
 
 	//インナーブロックの制御
 	const TEMPLATE = [//同一ブロックを２つ以上入れないこと（名称の文字列が重ならないこと）
@@ -190,10 +201,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						);
 					})}
 				</PanelBody>
-				<PanelBody title="自動応答メール" initialOpen={true} className="mailinfo_ctrl">
+				<PanelBody title={__("Automatic response email", 'itmar_guest_contact_block')} initialOpen={true} className="mailinfo_ctrl">
 					<PanelRow>
 						<ToggleControl
-							label='自動応答メールを発信する'
+							label={__('Send automatic response email', 'itmar_guest_contact_block')}
 							checked={is_retmail}
 							onChange={(newVal) => setAttributes({ is_retmail: newVal })}
 						/>
@@ -203,11 +214,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						<>
 							<PanelRow>
 								<TextControl
-									label="応答先メールアドレス"
+									label={__("Reply to email address", 'itmar_guest_contact_block')}
 									value={ret_mail}
 									isPressEnterToChange
 									onChange={(newVal) => setAttributes({ ret_mail: newVal })}
-									help="下に表示されているメールアドレスをクリックすると応答先がセットされます"
+									help={__("Click on the email address displayed below to set the response destination.", 'itmar_guest_contact_block')}
 								/>
 							</PanelRow>
 							{inputInnerBlocks.filter(block => block.name !== 'itmar/design-checkbox' && block.name !== 'itmar/design-button').map((input_elm, index) => {
@@ -229,14 +240,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							})}
 							<PanelRow>
 								<TextControl
-									label="自動応答メールの標題"
+									label={__("Automatic response email title", 'itmar_guest_contact_block')}
 									value={subject_ret_editing}
 									onChange={(newVal) => setSubjectRetValue(newVal)}// 一時的な編集値として保存する
 									onBlur={() => {
 										if (subject_ret_editing.length == 0) {
 											dispatch('core/notices').createNotice(
 												'error',
-												'通知メールの標題は空欄にしないでください。',
+												__('Do not leave the subject of the notification email blank. ', 'itmar_guest_contact_block'),
 												{ type: 'snackbar', isDismissible: true, }
 											);
 											// バリデーションエラーがある場合、編集値を元の値にリセットする
@@ -250,14 +261,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							</PanelRow>
 							<PanelRow>
 								<TextareaControl
-									label="自動応答メール本文"
+									label={__("Automatic response email body", 'itmar_guest_contact_block')}
 									value={message_ret_editing}
 									onChange={(newVal) => setMessageRetValue(newVal)}// 一時的な編集値として保存する
 									onBlur={() => {
 										if (message_ret_editing.length == 0) {
 											dispatch('core/notices').createNotice(
 												'error',
-												'通知メールの標題は空欄にしないでください。',
+												__('Do not leave the subject of the notification email blank. ', 'itmar_guest_contact_block'),
 												{ type: 'snackbar', isDismissible: true, }
 											);
 											// バリデーションエラーがある場合、編集値を元の値にリセットする
@@ -268,7 +279,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										}
 									}}
 									rows="5"
-									help="下に表示されている入力項目をクリックすると本文に引用されます。"
+									help={__("Click on the input field below to quote it in the text.", 'itmar_guest_contact_block')}
 								/>
 							</PanelRow>
 							{inputInnerBlocks.filter(block => block.name !== 'itmar/design-checkbox' && block.name !== 'itmar/design-button').map((input_elm, index) => {
@@ -291,7 +302,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							})}
 							<PanelRow>
 								<ToggleControl
-									label='応答の内容をDBに保存する'
+									label={__('Save response contents to DB', 'itmar_guest_contact_block')}
 									checked={is_dataSave}
 									onChange={(newVal) => setAttributes({ is_dataSave: newVal })}
 								/>
@@ -303,7 +314,32 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 			</InspectorControls>
 
-			<div {...useBlockProps()}>
+			<InspectorControls group="styles">
+				<PanelBody title={__("Global settings", 'itmar_guest_contact_block')} initialOpen={true} className="form_design_ctrl">
+					<BoxControl
+						label={__("Margin Setting", 'itmar_guest_contact_block')}
+						values={margin_value}
+						onChange={value => setAttributes({ margin_value: value })}
+						units={units}	// 許可する単位
+						allowReset={true}	// リセットの可否
+						resetValues={padding_resetValues}	// リセット時の値
+
+					/>
+					<BoxControl
+						label={__("Padding settings", 'itmar_guest_contact_block')}
+						values={padding_value}
+						onChange={value => setAttributes({ padding_value: value })}
+						units={units}	// 許可する単位
+						allowReset={true}	// リセットの可否
+						resetValues={padding_resetValues}	// リセット時の値
+
+					/>
+
+				</PanelBody>
+
+			</InspectorControls>
+
+			<div {...blockProps}>
 				<div {...innerBlocksProps}></div>
 			</div>
 

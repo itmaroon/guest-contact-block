@@ -163,7 +163,6 @@ jQuery(function ($) {
 
     //アニメーション中ならリターン
     if (animating) return false;
-    animating = true;
 
     let err_flg = false;//エラーフラグをセット
     //バリデーションチェック
@@ -179,8 +178,10 @@ jQuery(function ($) {
         }
       }
     })
-    if (err_flg) return;//エラーフラグがtrueなら処理終了
-
+    if (err_flg) {
+      return;//エラーフラグがtrueなら処理終了
+    }
+    animating = true;//アニメーションフラグを立てる
 
     //次の画面に遷移
     //アニメーションの実行

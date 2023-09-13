@@ -5,35 +5,36 @@
 	"version": "0.1.0",
 	"title": "Guest Contact Block",
 	"category": "media",
-	"description": "メール送信フォームを備えたブロックです。",
 	"supports": {
 		"multiple": false,
 		"html": false
 	},
 	"attributes": {
+		"margin_value": {
+			"type": "object",
+			"default": {
+				"top": "1em",
+				"left": "2em",
+				"bottom": "1em",
+				"right": "2em"
+			}
+		},
+		"padding_value": {
+			"type": "object",
+			"default": {
+				"top": "1em",
+				"left": "2em",
+				"bottom": "1em",
+				"right": "2em"
+			}
+		},
 		"master_mail": {
 			"type": "string",
 			"default": "master@sample.com"
 		},
-		"subject_info": {
-			"type": "string",
-			"default": "お問合せが入りました。"
-		},
-		"message_info": {
-			"type": "string",
-			"default": "以下の内容でお問合せが入りました。"
-		},
 		"ret_mail": {
 			"type": "string",
 			"default": ""
-		},
-		"subject_ret": {
-			"type": "string",
-			"default": "お問合せいただきありがとうございます。"
-		},
-		"message_ret": {
-			"type": "string",
-			"default": "以下の内容でお問合せを受け付けました。"
 		},
 		"is_retmail": {
 			"type": "boolean",

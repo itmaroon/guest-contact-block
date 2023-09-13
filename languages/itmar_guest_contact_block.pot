@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-08-10T13:54:16+02:00\n"
+"POT-Creation-Date: 2023-09-12T12:27:10+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: itmar_guest_contact_block\n"
@@ -30,82 +30,218 @@ msgstr ""
 msgid "Web Creator ITmaroon"
 msgstr ""
 
-#: guest-contact-block.php:85
+#: guest-contact-block.php:89
 msgid "The server detected an error in the input item. Registration process was interrupted. "
 msgstr ""
 
-#: guest-contact-block.php:123
+#: guest-contact-block.php:127
 msgid "Your autoresponder email has been successfully sent."
 msgstr ""
 
-#: guest-contact-block.php:125
+#: guest-contact-block.php:129
 msgid "The site administrator has been successfully notified."
 msgstr ""
 
-#: guest-contact-block.php:129
+#: guest-contact-block.php:133
 msgid "Failed to send auto-response email."
 msgstr ""
 
-#: guest-contact-block.php:131
+#: guest-contact-block.php:135
 msgid "Failed to notify site administrator."
 msgstr ""
 
-#: guest-contact-block.php:136
+#: guest-contact-block.php:140
 msgid "Invalid request."
 msgstr ""
 
-#: guest-contact-block.php:150
+#: guest-contact-block.php:154
 msgid "Inquiry Data"
 msgstr ""
 
-#: guest-contact-block.php:163
+#: guest-contact-block.php:167
 msgid "Receipt processing completed successfully."
 msgstr ""
 
+#: assets/contact_block.js:236
+msgid "sending..."
+msgstr ""
+
+#: build/index.js:125
+#: src/edit.js:87
+#: build/index.js:100
+msgid "The person in charge has been notified of your inquiry. Please wait for a while until we reply."
+msgstr ""
+
+#: build/index.js:126
+#: src/edit.js:88
+#: build/index.js:101
+msgid "Email notification to the person in charge failed."
+msgstr ""
+
+#: build/index.js:127
+#: src/edit.js:89
+#: build/index.js:102
+msgid "We have sent an automatic response email to you, so please check it."
+msgstr ""
+
+#: build/index.js:128
+#: src/edit.js:90
+#: build/index.js:103
+msgid "Failed to send automatic response email to you."
+msgstr ""
+
+#: build/index.js:152
+#: src/edit.js:119
 #: build/index.js:132
-#: src/edit.js:103
-#: build/index.js:116
 msgid "Inquiry information notification email"
 msgstr ""
 
-#: build/index.js:136
-#: src/edit.js:106
-#: build/index.js:119
+#: build/index.js:156
+#: src/edit.js:122
+#: build/index.js:135
 msgid "Notification email address (sender)"
 msgstr ""
 
+#: build/index.js:163
+#: src/edit.js:130
 #: build/index.js:143
-#: src/edit.js:114
-#: build/index.js:127
 msgid "The notification email address is blank or has an invalid format. "
 msgstr ""
 
+#: build/index.js:177
+#: src/edit.js:144
 #: build/index.js:157
-#: src/edit.js:128
-#: build/index.js:141
 msgid "Notification email subject"
 msgstr ""
 
-#: build/index.js:163
-#: src/edit.js:135
-#: build/index.js:148
+#: build/index.js:183
+#: build/index.js:275
+#: build/index.js:295
+#: src/edit.js:151
+#: src/edit.js:250
+#: src/edit.js:271
+#: build/index.js:164
+#: build/index.js:263
+#: build/index.js:284
 msgid "Do not leave the subject of the notification email blank. "
 msgstr ""
 
-#: build/index.js:177
-#: src/edit.js:149
-#: build/index.js:162
+#: build/index.js:197
+#: src/edit.js:165
+#: build/index.js:178
 msgid "Notification email body"
 msgstr ""
 
-#: build/index.js:183
-#: src/edit.js:156
-#: build/index.js:169
+#: build/index.js:203
+#: src/edit.js:172
+#: build/index.js:185
 msgid "Do not leave the body of the notification email blank. "
 msgstr ""
 
-#: build/index.js:197
-#: src/edit.js:167
-#: build/index.js:180
+#: build/index.js:217
+#: src/edit.js:183
+#: build/index.js:196
 msgid "Click the input item displayed below to quote it in the text."
+msgstr ""
+
+#: build/index.js:235
+#: src/edit.js:204
+#: build/index.js:217
+msgid "Automatic response email"
+msgstr ""
+
+#: build/index.js:239
+#: src/edit.js:207
+#: build/index.js:220
+msgid "Send automatic response email"
+msgstr ""
+
+#: build/index.js:245
+#: src/edit.js:217
+#: build/index.js:230
+msgid "Reply to email address"
+msgstr ""
+
+#: build/index.js:251
+#: src/edit.js:221
+#: build/index.js:234
+msgid "Click on the email address displayed below to set the response destination."
+msgstr ""
+
+#: build/index.js:269
+#: src/edit.js:243
+#: build/index.js:256
+msgid "Automatic response email title"
+msgstr ""
+
+#: build/index.js:289
+#: src/edit.js:264
+#: build/index.js:277
+msgid "Automatic response email body"
+msgstr ""
+
+#: build/index.js:309
+#: src/edit.js:282
+#: build/index.js:295
+msgid "Click on the input field below to quote it in the text."
+msgstr ""
+
+#: build/index.js:327
+#: src/edit.js:305
+#: build/index.js:318
+msgid "Save response contents to DB"
+msgstr ""
+
+#: build/index.js:335
+#: src/edit.js:318
+#: build/index.js:331
+msgid "Global settings"
+msgstr ""
+
+#: build/index.js:339
+#: src/edit.js:320
+#: build/index.js:333
+msgid "Margin Setting"
+msgstr ""
+
+#: build/index.js:350
+#: src/edit.js:329
+#: build/index.js:342
+msgid "Padding settings"
+msgstr ""
+
+#: build/index.js:401
+#: src/index.js:16
+#: build/index.js:378
+msgid "This is a block for setting up an inquiry form."
+msgstr ""
+
+#: build/index.js:406
+#: src/index.js:21
+#: build/index.js:383
+msgid "We have received an inquiry."
+msgstr ""
+
+#: build/index.js:410
+#: src/index.js:25
+#: build/index.js:387
+msgid "We have received an inquiry regarding the following information."
+msgstr ""
+
+#: build/index.js:414
+#: src/index.js:29
+#: build/index.js:391
+msgid "Thank you for contacting us."
+msgstr ""
+
+#: build/index.js:418
+#: src/index.js:33
+#: build/index.js:395
+msgid "We have received your inquiry with the following details."
+msgstr ""
+
+#: build/block.json
+#: src/block.json
+msgctxt "block title"
+msgid "Guest Contact Block"
 msgstr ""

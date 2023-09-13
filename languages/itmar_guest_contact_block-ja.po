@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Guest Contact Block 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/guest-contact-"
 "block\n"
-"POT-Creation-Date: 2023-08-10T13:54:16+02:00\n"
-"PO-Revision-Date: 2023-08-10 21:00+0900\n"
+"POT-Creation-Date: 2023-09-12T12:27:10+02:00\n"
+"PO-Revision-Date: 2023-09-12 19:39+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -32,69 +32,165 @@ msgstr "メール送信フォームの機能を備えたブロックです。"
 msgid "Web Creator ITmaroon"
 msgstr "WebクリエイターITmaroon"
 
-#: guest-contact-block.php:85
+#: guest-contact-block.php:89
 msgid ""
 "The server detected an error in the input item. Registration process was "
 "interrupted. "
 msgstr ""
 "サーバーで入力項目に不備が発見されました。登録処理は中断されました。 "
 
-#: guest-contact-block.php:123
+#: guest-contact-block.php:127
 msgid "Your autoresponder email has been successfully sent."
 msgstr "自動応答メールが正常に送信されました。"
 
-#: guest-contact-block.php:125
+#: guest-contact-block.php:129
 msgid "The site administrator has been successfully notified."
 msgstr "サイト管理者に正常に通知されました。"
 
-#: guest-contact-block.php:129
+#: guest-contact-block.php:133
 msgid "Failed to send auto-response email."
 msgstr "自動応答メールの送信に失敗しました。"
 
-#: guest-contact-block.php:131
+#: guest-contact-block.php:135
 msgid "Failed to notify site administrator."
 msgstr "サイト管理者への通知に失敗しました。"
 
-#: guest-contact-block.php:136
+#: guest-contact-block.php:140
 msgid "Invalid request."
 msgstr "不正なリクエストです。"
 
-#: guest-contact-block.php:150
+#: guest-contact-block.php:154
 msgid "Inquiry Data"
 msgstr "お問合せデータ"
 
-#: guest-contact-block.php:163
+#: guest-contact-block.php:167
 msgid "Receipt processing completed successfully."
 msgstr "受付処理が正常に完了しました。"
 
-#: build/index.js:132 src/edit.js:103 build/index.js:116
+#: assets/contact_block.js:236
+msgid "sending..."
+msgstr "送信中です..."
+
+#: build/index.js:125 src/edit.js:87 build/index.js:100
+msgid ""
+"The person in charge has been notified of your inquiry. Please wait for a "
+"while until we reply."
+msgstr ""
+"お問い合わせ内容は担当者に通知されました。 返信までしばらくお待ちください。"
+
+#: build/index.js:126 src/edit.js:88 build/index.js:101
+msgid "Email notification to the person in charge failed."
+msgstr "担当者へのメール通知に失敗しました。"
+
+#: build/index.js:127 src/edit.js:89 build/index.js:102
+msgid "We have sent an automatic response email to you, so please check it."
+msgstr "自動返信メールをお送りしておりますのでご確認下さい。"
+
+#: build/index.js:128 src/edit.js:90 build/index.js:103
+msgid "Failed to send automatic response email to you."
+msgstr "自動応答メールの送信に失敗しました。"
+
+#: build/index.js:152 src/edit.js:119 build/index.js:132
 msgid "Inquiry information notification email"
 msgstr "お問合せ送信通知メール"
 
-#: build/index.js:136 src/edit.js:106 build/index.js:119
+#: build/index.js:156 src/edit.js:122 build/index.js:135
 msgid "Notification email address (sender)"
 msgstr "通知先メールアドレス（送信元）"
 
-#: build/index.js:143 src/edit.js:114 build/index.js:127
+#: build/index.js:163 src/edit.js:130 build/index.js:143
 msgid "The notification email address is blank or has an invalid format. "
 msgstr "通知先メールアドレスが空欄または形式が不正です。"
 
-#: build/index.js:157 src/edit.js:128 build/index.js:141
+#: build/index.js:177 src/edit.js:144 build/index.js:157
 msgid "Notification email subject"
 msgstr "通知メールの標題"
 
-#: build/index.js:163 src/edit.js:135 build/index.js:148
+#: build/index.js:183 build/index.js:275 build/index.js:295 src/edit.js:151
+#: src/edit.js:250 src/edit.js:271 build/index.js:164 build/index.js:263
+#: build/index.js:284
 msgid "Do not leave the subject of the notification email blank. "
 msgstr "'通知メールの標題は空欄にしないでください。'"
 
-#: build/index.js:177 src/edit.js:149 build/index.js:162
+#: build/index.js:197 src/edit.js:165 build/index.js:178
 msgid "Notification email body"
 msgstr "通知メール本文"
 
-#: build/index.js:183 src/edit.js:156 build/index.js:169
+#: build/index.js:203 src/edit.js:172 build/index.js:185
 msgid "Do not leave the body of the notification email blank. "
 msgstr "'通知メールの本文は空欄にしないでください。'"
 
-#: build/index.js:197 src/edit.js:167 build/index.js:180
+#: build/index.js:217 src/edit.js:183 build/index.js:196
 msgid "Click the input item displayed below to quote it in the text."
 msgstr "下に表示されている入力項目をクリックすると本文に引用されます。"
+
+#: build/index.js:235 src/edit.js:204 build/index.js:217
+msgid "Automatic response email"
+msgstr "自動応答メール"
+
+#: build/index.js:239 src/edit.js:207 build/index.js:220
+msgid "Send automatic response email"
+msgstr "自動返信メールを送信する"
+
+#: build/index.js:245 src/edit.js:217 build/index.js:230
+msgid "Reply to email address"
+msgstr "返信先メールアドレス"
+
+#: build/index.js:251 src/edit.js:221 build/index.js:234
+msgid ""
+"Click on the email address displayed below to set the response destination."
+msgstr ""
+"以下に表示されるメールアドレスをクリックして返信先を設定してください。"
+
+#: build/index.js:269 src/edit.js:243 build/index.js:256
+msgid "Automatic response email title"
+msgstr "自動返信メールの件名"
+
+#: build/index.js:289 src/edit.js:264 build/index.js:277
+msgid "Automatic response email body"
+msgstr "自動応答メール本文"
+
+#: build/index.js:309 src/edit.js:282 build/index.js:295
+msgid "Click on the input field below to quote it in the text."
+msgstr "本文中で引用するには下の入力フィールドをクリックしてください。"
+
+#: build/index.js:327 src/edit.js:305 build/index.js:318
+msgid "Save response contents to DB"
+msgstr "応答内容をDBに保存"
+
+#: build/index.js:335 src/edit.js:318 build/index.js:331
+msgid "Global settings"
+msgstr "全体設定"
+
+#: build/index.js:339 src/edit.js:320 build/index.js:333
+msgid "Margin Setting"
+msgstr "マージン設定"
+
+#: build/index.js:350 src/edit.js:329 build/index.js:342
+msgid "Padding settings"
+msgstr "パディング設定"
+
+#: build/index.js:401 src/index.js:16 build/index.js:378
+msgid "This is a block for setting up an inquiry form."
+msgstr "お問い合わせフォームを設置するためのブロックです。"
+
+#: build/index.js:406 src/index.js:21 build/index.js:383
+msgid "We have received an inquiry."
+msgstr "お問い合わせをいただきました。"
+
+#: build/index.js:410 src/index.js:25 build/index.js:387
+msgid "We have received an inquiry regarding the following information."
+msgstr "下記の内容に関するお問い合わせを受け付けております。"
+
+#: build/index.js:414 src/index.js:29 build/index.js:391
+msgid "Thank you for contacting us."
+msgstr "お問合せいただきありがとうございます。"
+
+#: build/index.js:418 src/index.js:33 build/index.js:395
+msgid "We have received your inquiry with the following details."
+msgstr "以下の内容のお問い合わせを受け付けております。"
+
+#: build/block.json src/block.json
+msgctxt "block title"
+msgid "Guest Contact Block"
+msgstr ""
