@@ -81,7 +81,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	//インナーブロックの制御
 	const TEMPLATE = [//同一ブロックを２つ以上入れないこと（名称の文字列が重ならないこと）
 		['itmar/design-process', {}],
-		['itmar/input-figure-block', {}],
+		['itmar/input-figure-block', { form_name: "inquiry_form" }],
 		['itmar/confirm-figure-block', {}],
 		['itmar/thanks-figure-block', {
 			infomail_success: __("The person in charge has been notified of your inquiry. Please wait for a while until we reply.", 'itmar_guest_contact_block'),

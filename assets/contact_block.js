@@ -191,12 +191,16 @@ jQuery(function ($) {
     process_change($(this).parent().next(), true);
 
     //確認データの表示
-    let input_elm = $(this).find('input:not([type="submit"]), textarea')
+    let disp_table = $('.wp-block-itmar-design-table');
+    let source_name = disp_table.data('source');
+    let source_elm = $(`*[name="${source_name}"]`);
+    let input_elm = source_elm.find('input:not([type="submit"]):not([type="checkbox"]), textarea');
     input_elm.each(function (index) {
       let input_val = $(this).val();
-      $('#itmar_send_exec').find('tr').eq(index).find('td').text(input_val);
+      $('#itmar_send_exec').find('tbody tr').eq(index).find('td').text(input_val);
     });
   });
+
 
 
   //実行またはキャンセルボタンが押されたときの処理
