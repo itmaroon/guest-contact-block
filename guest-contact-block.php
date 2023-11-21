@@ -15,7 +15,8 @@
  * @package           itmar
  */
 
-
+ if ( ! defined( 'ABSPATH' ) ) exit;
+ 
 function itmar_contact_block_block_init() {
 	$script_handle = 'text_domain_handle';
 	// スクリプトの登録
